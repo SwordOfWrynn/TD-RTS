@@ -10101,6 +10101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1303316096}
   - component: {fileID: 1303316095}
+  - component: {fileID: 1303316097}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -10159,12 +10160,26 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1303316094}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 2, z: 0}
+  m_LocalPosition: {x: -16.42, y: -3.4, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1303316097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1303316094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81935526b5c257240a434a820ecebfaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 5
+  enemyTag: Enemy
+  target: {fileID: 0}
 --- !u!1001 &1320104214
 Prefab:
   m_ObjectHideFlags: 0
@@ -10441,6 +10456,7 @@ GameObject:
   - component: {fileID: 1922437460}
   - component: {fileID: 1922437459}
   - component: {fileID: 1922437458}
+  - component: {fileID: 1922437462}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -10511,6 +10527,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1922437462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1922437457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d4e0b967cfe17c4481ea9c750b428f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panSpeed: 20
+  panBorderThickness: 20
+  panLimit: {x: 25, y: 15}
+  zoomSpeed: 4
+  smoothSpeed: 2
+  minOrtho: 8
+  maxOrtho: 12
 --- !u!1 &1958699023
 GameObject:
   m_ObjectHideFlags: 0
