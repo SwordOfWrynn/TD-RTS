@@ -13674,6 +13674,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114478731423678066, guid: 793aa38c68df009448156ce3cc97fe2a,
+        type: 2}
+      propertyPath: hoverColor.r
+      value: 0.60294116
+      objectReference: {fileID: 0}
+    - target: {fileID: 114478731423678066, guid: 793aa38c68df009448156ce3cc97fe2a,
+        type: 2}
+      propertyPath: hoverColor.g
+      value: 0.60294116
+      objectReference: {fileID: 0}
+    - target: {fileID: 114478731423678066, guid: 793aa38c68df009448156ce3cc97fe2a,
+        type: 2}
+      propertyPath: hoverColor.b
+      value: 0.60294116
+      objectReference: {fileID: 0}
+    - target: {fileID: 114478731423678066, guid: 793aa38c68df009448156ce3cc97fe2a,
+        type: 2}
+      propertyPath: hoverColor.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 793aa38c68df009448156ce3cc97fe2a, type: 2}
   m_IsPrefabParent: 0
@@ -14279,6 +14299,34 @@ Prefab:
     - target: {fileID: 4616795845353176, guid: dbc6a84ff60bbc94eb3dc3e98b396337, type: 2}
       propertyPath: m_RootOrder
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114918846762063822, guid: dbc6a84ff60bbc94eb3dc3e98b396337,
+        type: 2}
+      propertyPath: fireRate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 212508818873099002, guid: dbc6a84ff60bbc94eb3dc3e98b396337,
+        type: 2}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212508818873099002, guid: dbc6a84ff60bbc94eb3dc3e98b396337,
+        type: 2}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616795845353176, guid: dbc6a84ff60bbc94eb3dc3e98b396337, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 5.9999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616795845353176, guid: dbc6a84ff60bbc94eb3dc3e98b396337, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 5.9999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 212508818873099002, guid: dbc6a84ff60bbc94eb3dc3e98b396337,
+        type: 2}
+      propertyPath: m_DrawMode
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbc6a84ff60bbc94eb3dc3e98b396337, type: 2}

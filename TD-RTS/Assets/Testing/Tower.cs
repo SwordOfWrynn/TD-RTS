@@ -64,9 +64,12 @@ public class Tower : MonoBehaviour {
     void Shoot()
     {
         //Spawn on top of tower sprite
-        Instantiate(bulletPrefab, new Vector3(transform.position.x, transform.position.y, -1), transform.rotation);
+        GameObject bulletGO = Instantiate(bulletPrefab, new Vector3(transform.position.x, transform.position.y, -1), transform.rotation);
         //spawn below
-        //Instantiate(bulletPrefab, transform.position, transform.rotation);
+        //GameObject bulletGO = Instantiate(bulletPrefab, transform.position, transform.rotation);
+        Bullet bullet = bulletGO.GetComponent<Bullet>();
+        if (bullet != null)
+            bullet.Seek(target);
     }
 
 
