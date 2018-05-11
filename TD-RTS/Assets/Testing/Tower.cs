@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Tower : MonoBehaviour {
+    
+    [Header("Attributes")]
 
     public float range = 5f;
+    public float fireRate = 1f;
     public string enemyTag = "Enemy";
 
-    public Transform target;
+    [Header("Unity Setup")]
+    public GameObject bulletPrefab;
 
-
+    private Transform target;
+    private float fireCountdown = 0f;
 
 	// Use this for initialization
 	void Start () {
@@ -36,6 +41,8 @@ public class Tower : MonoBehaviour {
         {
             target = nearestEnemy.transform;
         }
+        else
+            target = null;
 
     }
 	
@@ -44,7 +51,24 @@ public class Tower : MonoBehaviour {
         if (target == null)
             return;
 
+        Vector2 dir = target.position - transform.position;
+
+        if (fireCountdown <= 0)
+        {
+            Shoot();
+            fireCountdown = 1f / fireRate;
+        }
+        fireCountdown -= Time.deltaTime;
 	}
+
+    void Shoot()
+    {
+        //Spawn on top of tower sprite
+        Instantiate(bulletPrefab, new Vector3(transform.position.x, transform.position.y, -1), transform.rotation);
+        //spawn below
+        //Instantiate(bulletPrefab, transform.position, transform.rotation);
+    }
+
 
     void OnDrawGizmosSelected()
     {
