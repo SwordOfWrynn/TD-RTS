@@ -12,15 +12,12 @@ public class CameraController : MonoBehaviour {
     public float minOrtho = 1.0f;
     public float maxOrtho = 20.0f;
     private float targetOrtho;
-
-
-
+    
     void Start()
     {
         targetOrtho = Camera.main.orthographicSize;
     }
-
-
+    
     void Update()
     {
 
@@ -57,7 +54,7 @@ public class CameraController : MonoBehaviour {
         }
         Camera.main.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, targetOrtho, smoothSpeed * Time.deltaTime);
         #endregion
-#endif
+#else
         #region Mobile Camera Controls
         if (Input.touchCount == 2)
         {
@@ -75,59 +72,23 @@ public class CameraController : MonoBehaviour {
             targetOrtho += deltaMagDiff * zoomSpeed;
             targetOrtho = Mathf.Clamp(targetOrtho, minOrtho, maxOrtho);
             Camera.main.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, targetOrtho, smoothSpeed * Time.deltaTime);
+            return;
         }
-
-
-        /*if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved)
-        {
-            Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
-            transform.Translate(-touchDeltaPosition.x * speed * Time.deltaTime, -touchDeltaPosition.y * speed * Time.deltaTime, 0);
-
-            Vector3 tmpPosX = transform.position;
-            tmpPosX.x = Mathf.Clamp(tmpPosX.x, maxXleft, maxXright);
-            transform.position = tmpPosX;
-
-
-            Vector3 tmpPosY = transform.position;
-            tmpPosY.y = Mathf.Clamp(tmpPosY.y, maxYleft, maxYright);
-            transform.position = tmpPosY;
-
-        }*/
-
-        /*if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved)
-        {
-            Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
-            Vector2 touchPosition = Input.GetTouch(0).position;
-            Vector2 touchDeltaMag = (touchDeltaPosition - touchPosition);
-            //transform.Translate(-touchDeltaPosition.x * speed * Time.deltaTime, -touchDeltaPosition.y * speed * Time.deltaTime, 0);
-            pos.x = -touchDeltaMag.x * panSpeed * Time.deltaTime;
-            pos.y =  -touchDeltaMag.y * panSpeed * Time.deltaTime;
-        }*/
 
         if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved)
         {
             // Get movement of the finger since last frame
             Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
 
-            // Move object across XY plane
-            //transform.Translate(-touchDeltaPosition.x * speed, -touchDeltaPosition.y * speed, 0);
-
-            //pos.x = touchDeltaPosition.x * Time.deltaTime;
-            //pos.y = touchDeltaPosition.y * Time.deltaTime;
-            pos = touchDeltaPosition * Time.deltaTime;
+            pos.x = pos.x + -touchDeltaPosition.x * Time.deltaTime;
+            pos.y = pos.y + -touchDeltaPosition.y * Time.deltaTime;
         }
-
-
-
         #endregion
-
-
-
-
-
+#endif
+        //LIMIT CAMERA MOVEMENT
         pos.x = Mathf.Clamp(pos.x, -panLimit.x, panLimit.x);
         pos.y = Mathf.Clamp(pos.y, -panLimit.y, panLimit.y);
-
+        //Move camera
         transform.position = new Vector3 (pos.x, pos.y, -10) ;
     }
     
