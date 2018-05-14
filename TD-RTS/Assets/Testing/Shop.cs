@@ -1,16 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Shop : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    BuildManager buildManager;
+
+    void Start()
+    {
+        buildManager = BuildManager.instance;
+    }
+
+    public void PurchaseStandardTower()
+    {
+        Debug.Log("Standard Tower selected");
+        buildManager.SetTowerToBuild(buildManager.standardTowerPrefab);
+    }
+
+    public void PurchaseMissileTower()
+    {
+        Debug.Log("Missile Tower selected");
+        buildManager.SetTowerToBuild(buildManager.missileTowerPrefab);
+    }
+
 }

@@ -2,6 +2,7 @@
 
 public class BuildManager : MonoBehaviour {
 
+    #region Singleton management
     public static BuildManager instance;
 
     void Awake()
@@ -13,19 +14,20 @@ public class BuildManager : MonoBehaviour {
         }
         instance = this;
     }
-
+    #endregion
     public GameObject standardTowerPrefab;
+    public GameObject missileTowerPrefab;
 
     private GameObject towerToBuild;
-
-    void Start()
-    {
-        towerToBuild = standardTowerPrefab;
-    }
 
     public GameObject GetTowerToBuild()
     {
         return towerToBuild;
+    }
+
+    public void SetTowerToBuild(GameObject _tower)
+    {
+        towerToBuild = _tower;
     }
 
 }
