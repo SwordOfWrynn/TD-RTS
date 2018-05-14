@@ -13560,6 +13560,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b64dfe7e39be6248ba803bd54ac2b74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  standardTower:
+    prefab: {fileID: 1269785814968524, guid: dbc6a84ff60bbc94eb3dc3e98b396337, type: 2}
+    cost: 50
+  missileTower:
+    prefab: {fileID: 1468221133329424, guid: 46ab03032ba47db43b9b0592efa8e8a8, type: 2}
+    cost: 100
 --- !u!114 &150306109
 MonoBehaviour:
   m_ObjectHideFlags: 0

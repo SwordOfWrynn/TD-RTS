@@ -2,6 +2,10 @@
 
 public class Shop : MonoBehaviour {
 
+    //make one for each tower
+    public TowerBlueprint standardTower;
+    public TowerBlueprint missileTower;
+
     BuildManager buildManager;
 
     void Start()
