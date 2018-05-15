@@ -69,6 +69,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverColor: {r: 0.60294116, g: 0.60294116, b: 0.60294116, a: 1}
+  cantBuildColor: {r: 0.77205884, g: 0.21004544, b: 0.21004544, a: 1}
+  tower: {fileID: 0}
 --- !u!212 &212898153565281450
 SpriteRenderer:
   m_ObjectHideFlags: 1

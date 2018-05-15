@@ -13,16 +13,16 @@ public class Shop : MonoBehaviour {
         buildManager = BuildManager.instance;
     }
 
-    public void PurchaseStandardTower()
+    public void SelectStandardTower()
     {
         Debug.Log("Standard Tower selected");
-        buildManager.SetTowerToBuild(buildManager.standardTowerPrefab);
+        buildManager.SelectTowerToBuild(standardTower);
     }
 
-    public void PurchaseMissileTower()
+    public void SelectMissileTower()
     {
         Debug.Log("Missile Tower selected");
-        buildManager.SetTowerToBuild(buildManager.missileTowerPrefab);
+        buildManager.SelectTowerToBuild(missileTower);
     }
 
 }

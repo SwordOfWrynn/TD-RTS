@@ -4,8 +4,9 @@ using UnityEngine.EventSystems;
 public class Node : MonoBehaviour {
 
     public Color hoverColor;
-
-    private GameObject tower;
+    public Color cantBuildColor;
+    [Header("Optional")]
+    public GameObject tower;
 
     private Renderer rend;
     private Color startColor;
@@ -18,6 +19,11 @@ public class Node : MonoBehaviour {
         startColor = rend.material.color;
     }
 
+    public Vector3 GetBuildPosition()
+    {
+        return new Vector3(transform.position.x, transform.position.y, -1);
+    }
+
     void OnMouseDown()
     {
 
@@ -26,7 +32,7 @@ public class Node : MonoBehaviour {
             return;
 
         //if no tower is selected
-        if (buildManager.GetTowerToBuild() == null)
+        if (!buildManager.CanBuild)
             return;
 
         //if there is already a tower
@@ -37,9 +43,8 @@ public class Node : MonoBehaviour {
         }
 
         //Build a tower
-
-        GameObject towerToBuild = buildManager.GetTowerToBuild();
-        tower = Instantiate(towerToBuild, new Vector3(transform.position.x, transform.position.y, -1), transform.rotation);
+        buildManager.BuildTowerOn(this);
+        
     }
 
     void OnMouseEnter()
@@ -48,9 +53,17 @@ public class Node : MonoBehaviour {
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
-        if (buildManager.GetTowerToBuild() == null)
+        if (!buildManager.CanBuild)
             return;
-        rend.material.color = hoverColor;
+
+        if (buildManager.HasMoney)
+        {
+            rend.material.color = hoverColor;
+        }
+        else
+        {
+            rend.material.color = cantBuildColor;
+        }
     }
 
     void OnMouseExit()
