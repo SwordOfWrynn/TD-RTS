@@ -5,6 +5,7 @@ public class Shop : MonoBehaviour {
     //make one for each tower
     public TowerBlueprint standardTower;
     public TowerBlueprint missileTower;
+    public TowerBlueprint laserTower;
 
     BuildManager buildManager;
 
@@ -23,6 +24,12 @@ public class Shop : MonoBehaviour {
     {
         Debug.Log("Missile Tower selected");
         buildManager.SelectTowerToBuild(missileTower);
+    }
+
+    public void SelectLaserTower()
+    {
+        Debug.Log("Missile Tower selected");
+        buildManager.SelectTowerToBuild(laserTower);
     }
 
 }

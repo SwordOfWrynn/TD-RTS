@@ -4,16 +4,25 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour {
     
-    [Header("Attributes")]
-
+    [Header("General")]
     public float range = 5f;
+
+    [Header("Use Bullets (default)")]
     public float fireRate = 1f;
     public string enemyTag = "Enemy";
+
+    [Header("Use laser")]
+    public bool useLaser = false;
+    public int damageOverTime = 30;
+    public float slowAmount = .5f;
+    public LineRenderer lineRenderer;
+    public ParticleSystem impactEffect;
 
     [Header("Unity Setup")]
     public GameObject bulletPrefab;
 
     private Transform target;
+    private Enemy targetEnemy;
     private float fireCountdown = 0f;
 
 	// Use this for initialization
@@ -40,6 +49,7 @@ public class Tower : MonoBehaviour {
         if (nearestEnemy != null && shortestDistance <= range)
         {
             target = nearestEnemy.transform;
+            targetEnemy = nearestEnemy.GetComponent<Enemy>();
         }
         else
             target = null;
@@ -49,17 +59,57 @@ public class Tower : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (target == null)
+        {
+            if (useLaser)
+            {
+                if (lineRenderer.enabled)
+                {
+                    lineRenderer.enabled = false;
+                    impactEffect.Stop();
+                }
+                    
+            }
             return;
+        }
+           
+        LockOnTarget();
 
+        if (useLaser)
+            Laser();
+        else
+        {
+           if (fireCountdown <= 0)
+           {
+               Shoot();
+               fireCountdown = 1f / fireRate;
+           }
+        fireCountdown -= Time.deltaTime;
+        }
+	}
+
+    void LockOnTarget()
+    {
         Vector2 dir = target.position - transform.position;
 
-        if (fireCountdown <= 0)
+    }
+
+    void Laser()
+    {
+        targetEnemy.TakeDamage(damageOverTime * Time.deltaTime);
+        targetEnemy.Slow(slowAmount);
+
+        if (!lineRenderer.enabled)
         {
-            Shoot();
-            fireCountdown = 1f / fireRate;
+            lineRenderer.enabled = true;
+            impactEffect.Play();
         }
-        fireCountdown -= Time.deltaTime;
-	}
+            
+
+        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition( 1, target.position);
+
+        impactEffect.transform.position = target.position;
+    }
 
     void Shoot()
     {

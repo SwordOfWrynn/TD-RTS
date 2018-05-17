@@ -24,8 +24,9 @@ public class WaveSpawner : MonoBehaviour {
         countdown -= Time.deltaTime;
         countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
 
+        waveCountDownText.text = string.Format("{00:00.00}", countdown);
+
         //Mathf.Floor will keep it from displaying decimals
-        waveCountDownText = string.Format 
         //waveCountDownText.text = Mathf.Round(countdown).ToString();
     }
 

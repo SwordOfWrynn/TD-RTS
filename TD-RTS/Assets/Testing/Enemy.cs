@@ -2,38 +2,37 @@
 
 public class Enemy : MonoBehaviour {
 
-    public float speed = 10.0f;
+    public float startSpeed = 10f;
+    [HideInInspector]
+    public float speed;
+    public float health = 100;
+    public int value = 25;
+    public GameObject deathEffect;
 
-    private Transform target;
-    private int waypointIndex = 0;
-
-    private void Start()
+    void Start()
     {
-        target = Waypoints.waypoints[0];
+        speed = startSpeed;
     }
 
-    private void Update()
+    public void TakeDamage(float _amount)
     {
-        Vector2 dir = target.position - transform.position;
-        //multiply by Time.deltaTime so that the speed won't change based on frame rate
-        transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
-
-        if (Vector2.Distance(transform.position, target.position) <= 0.1f)
-        {
-            GetNextWaypoint();
-        }
+        health -= _amount;
+        if (health <= 0)
+            Die();
     }
 
-    void GetNextWaypoint()
+    public void Slow(float _percent)
     {
-        if (waypointIndex >= Waypoints.waypoints.Length -1)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        waypointIndex++;
-        target = Waypoints.waypoints[waypointIndex];
+        speed = startSpeed * (1 - _percent);
     }
 
+    void Die()
+    {
+        PlayerStats.Money += value;
+
+        GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(effect, .5f);
+        
+        Destroy(gameObject);
+    }
 }

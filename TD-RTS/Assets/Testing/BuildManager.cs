@@ -15,8 +15,6 @@ public class BuildManager : MonoBehaviour {
         instance = this;
     }
     #endregion
-    public GameObject standardTowerPrefab;
-    public GameObject missileTowerPrefab;
 
     private TowerBlueprint towerToBuild;
     //if towerToBuild not equal to null returns true, else returns false
