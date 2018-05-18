@@ -22,12 +22,13 @@ public class TowersAvailable : MonoBehaviour {
     public bool missileTower;
     public bool laserTower;
 
-    public GameObject[] buildingButtons;
-    public List<IsAvailable> isAvailableList;
+    private GameObject[] buildingButtons;
+    private List<IsAvailable> isAvailableList;
 
     // Use this for initialization
     void Start () {
         buildingButtons = GameObject.FindGameObjectsWithTag("BuildingButtons");
+        isAvailableList = new List<IsAvailable>();
         IsAvailable isAvailable;
         for (int i = 0; i < buildingButtons.Length; i++)
         {
