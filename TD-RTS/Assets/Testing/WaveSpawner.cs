@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using TMPro;
 
 public class WaveSpawner : MonoBehaviour {
 
     public Transform enemyPrefab;
     public Transform spawnPoint;
     public float timeBetweenWaves = 5f;
-    public Text waveCountDownText;
+    public TextMeshProUGUI waveCountDownText;
 
     //countdown number will determine time until first wave
     private float countdown = 2.5f;
