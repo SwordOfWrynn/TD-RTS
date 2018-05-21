@@ -31,19 +31,22 @@ public class Node : MonoBehaviour {
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
+        //if there is already a tower
+        if (tower != null)
+        {
+            //select node tower is on
+            buildManager.SelectNode(this);
+            return;
+        }
+
         //if no tower is selected
         if (!buildManager.CanBuild)
             return;
 
-        //if there is already a tower
-        if (tower != null)
-        {
-            Debug.Log("Can't build here");
-            return;
-        }
-
         //Build a tower
         buildManager.BuildTowerOn(this);
+        //unselect tower type after building
+        //buildManager.towerToBuild = null;
         
     }
 

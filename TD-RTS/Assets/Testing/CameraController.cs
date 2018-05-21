@@ -20,6 +20,12 @@ public class CameraController : MonoBehaviour {
     
     void Update()
     {
+        if (GameManager.GameIsOver)
+        {
+            this.enabled = false;
+            return;
+        }
+
 
         Vector2 pos = transform.position;
 

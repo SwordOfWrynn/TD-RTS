@@ -16,10 +16,13 @@ public class BuildManager : MonoBehaviour {
     }
     #endregion
 
-    private TowerBlueprint towerToBuild;
+    public TowerBlueprint towerToBuild;
+    private Node selectedNode;
+
     //if towerToBuild not equal to null returns true, else returns false
     public bool CanBuild { get { return towerToBuild != null; } }
     public bool HasMoney { get { return PlayerStats.Money >= towerToBuild.cost; } }
+    public NodeUI nodeUI;
 
     public void BuildTowerOn(Node _node)
     {
@@ -36,9 +39,30 @@ public class BuildManager : MonoBehaviour {
         Debug.Log(towerToBuild.prefab.name + " built. Money left = " + PlayerStats.Money);
     }
 
+    public void SelectNode(Node _node)
+    {
+        if(selectedNode == _node)
+        {
+            DeselectNode();
+            return;
+        }
+
+        selectedNode = _node;
+        towerToBuild = null;
+
+        nodeUI.SetTarget(_node);
+    }
+
+    public void DeselectNode()
+    {
+        selectedNode = null;
+        nodeUI.Hide();
+    }
+
     public void SelectTowerToBuild(TowerBlueprint _tower)
     {
         towerToBuild = _tower;
+        DeselectNode();
     }
 
 }
