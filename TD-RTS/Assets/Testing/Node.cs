@@ -8,6 +8,11 @@ public class Node : MonoBehaviour {
     [Header("Optional")]
     public GameObject tower;
 
+    [HideInInspector]
+    public TowerBlueprint towerBlueprint;
+    [HideInInspector]
+    public bool isUpgraded = false;
+
     private Renderer rend;
     private Color startColor;
 
@@ -44,10 +49,56 @@ public class Node : MonoBehaviour {
             return;
 
         //Build a tower
-        buildManager.BuildTowerOn(this);
+        BuildTower(buildManager.GetTowerToBuild());
         //unselect tower type after building
         //buildManager.towerToBuild = null;
         
+    }
+
+    void BuildTower(TowerBlueprint _blueprint)
+    {
+        if (PlayerStats.Money < _blueprint.cost)
+        {
+            Debug.Log(PlayerStats.Money + " is not enough to build " + _blueprint.prefab.name);
+            return;
+        }
+
+        PlayerStats.Money -= _blueprint.cost;
+        
+        GameObject newTower = Instantiate(_blueprint.prefab, GetBuildPosition(), Quaternion.identity);
+        tower = newTower;
+
+        towerBlueprint = _blueprint;
+
+        Debug.Log(_blueprint.prefab.name + " built. Money left = " + PlayerStats.Money);
+    }
+
+    public void UpgradeTower()
+    {
+        if(PlayerStats.Money < towerBlueprint.upgradeCost)
+        {
+            Debug.Log(PlayerStats.Money + " is not enough to upgrade " + towerBlueprint.prefab.name);
+            return;
+        }
+
+        PlayerStats.Money -= towerBlueprint.upgradeCost;
+        //Destroy old version of turret for new one
+        Destroy(tower);
+        //Build upgraded turret
+        GameObject newTower = Instantiate(towerBlueprint.upgradedPrefab, GetBuildPosition(), Quaternion.identity);
+        tower = newTower;
+
+        isUpgraded = true;
+        Debug.Log(towerBlueprint.prefab.name + " upgraded. Money left = " + PlayerStats.Money);
+    }
+
+    public void SellTower()
+    {
+        PlayerStats.Money += towerBlueprint.GetSellAmount();
+        Destroy(tower);
+        tower = null;
+        towerBlueprint = null;
+        isUpgraded = false;
     }
 
     void OnMouseEnter()

@@ -24,21 +24,6 @@ public class BuildManager : MonoBehaviour {
     public bool HasMoney { get { return PlayerStats.Money >= towerToBuild.cost; } }
     public NodeUI nodeUI;
 
-    public void BuildTowerOn(Node _node)
-    {
-        if (PlayerStats.Money < towerToBuild.cost)
-        {
-            Debug.Log("Need more money, " + PlayerStats.Money + " is not enough to build " + towerToBuild.prefab.name);
-            return;
-        }
-
-        PlayerStats.Money -= towerToBuild.cost;
-
-        GameObject tower = Instantiate(towerToBuild.prefab, _node.GetBuildPosition(), Quaternion.identity);
-        _node.tower = tower;
-        Debug.Log(towerToBuild.prefab.name + " built. Money left = " + PlayerStats.Money);
-    }
-
     public void SelectNode(Node _node)
     {
         if(selectedNode == _node)
@@ -63,6 +48,12 @@ public class BuildManager : MonoBehaviour {
     {
         towerToBuild = _tower;
         DeselectNode();
+    }
+
+    //tell other scripts what tower is selected without making towerToBuild public
+    public TowerBlueprint GetTowerToBuild()
+    {
+        return towerToBuild;
     }
 
 }
