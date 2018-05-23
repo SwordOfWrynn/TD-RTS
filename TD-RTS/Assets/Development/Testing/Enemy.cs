@@ -1,22 +1,31 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour {
 
+    //so slowing knows what to set speed back to
     public float startSpeed = 10f;
-    [HideInInspector]
-    public float speed;
-    public float health = 100;
+    public float startHealth = 100;
+    public float health;
     public int value = 25;
     public GameObject deathEffect;
+    [Header("Unity Stuff")]
+    public Image healthBar;
+
+    [HideInInspector]
+    public float speed;
+
 
     void Start()
     {
         speed = startSpeed;
+        health = startHealth;
     }
 
     public void TakeDamage(float _amount)
     {
         health -= _amount;
+        healthBar.fillAmount = health / startHealth;
         if (health <= 0)
             Die();
     }
@@ -32,7 +41,7 @@ public class Enemy : MonoBehaviour {
 
         GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, .5f);
-        
+
         Destroy(gameObject);
     }
 }
