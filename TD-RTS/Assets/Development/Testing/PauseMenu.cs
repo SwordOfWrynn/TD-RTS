@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour {
 
     public GameObject pauseUI;
+    public SceneFader sceneFader;
 
 	// Use this for initialization
 	void Start () {
@@ -36,13 +37,14 @@ public class PauseMenu : MonoBehaviour {
     public void Restart()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        sceneFader.FadeTo(SceneManager.GetActiveScene().name);
     }
 
     public void MainMenu()
     {
+        Toggle();
         Time.timeScale = 1;
-        SceneManager.LoadScene("MainMenu");
+        sceneFader.FadeTo("MainMenu");
     }
 
 }

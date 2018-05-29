@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameOver : MonoBehaviour {
 
     public TextMeshProUGUI wavesText;
-
+    public SceneFader sceneFader;
     
     void OnEnable()
     {
@@ -17,12 +17,12 @@ public class GameOver : MonoBehaviour {
 
     public void Retry()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        sceneFader.FadeTo(SceneManager.GetActiveScene().name);
     }
 
     public void MainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        sceneFader.FadeTo("MainMenu");
     }
 
 }

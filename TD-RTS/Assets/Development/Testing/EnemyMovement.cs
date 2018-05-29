@@ -44,6 +44,7 @@ public class EnemyMovement : MonoBehaviour {
 
     void ReachEnd()
     {
+        WaveSpawner.enemiesAlive--;
         PlayerStats.Lives--;
         Destroy(gameObject);
     }

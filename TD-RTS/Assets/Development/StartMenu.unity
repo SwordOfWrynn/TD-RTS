@@ -113,6 +113,54 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &59317483
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4993219087418402, guid: 85f3f73106ba2f845b123af739bb6bdb, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 544.031
+      objectReference: {fileID: 0}
+    - target: {fileID: 4993219087418402, guid: 85f3f73106ba2f845b123af739bb6bdb, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 260.4997
+      objectReference: {fileID: 0}
+    - target: {fileID: 4993219087418402, guid: 85f3f73106ba2f845b123af739bb6bdb, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -8.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 4993219087418402, guid: 85f3f73106ba2f845b123af739bb6bdb, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4993219087418402, guid: 85f3f73106ba2f845b123af739bb6bdb, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4993219087418402, guid: 85f3f73106ba2f845b123af739bb6bdb, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4993219087418402, guid: 85f3f73106ba2f845b123af739bb6bdb, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4993219087418402, guid: 85f3f73106ba2f845b123af739bb6bdb, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 85f3f73106ba2f845b123af739bb6bdb, type: 2}
+  m_IsPrefabParent: 0
+--- !u!114 &59317484 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114695700382106834, guid: 85f3f73106ba2f845b123af739bb6bdb,
+    type: 2}
+  m_PrefabInternal: {fileID: 59317483}
+  m_Script: {fileID: 11500000, guid: d22a287b354bac74d8a141394bdd8a5b, type: 3}
 --- !u!1 &399321136
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,7 +889,7 @@ GameObject:
   - component: {fileID: 1836964342}
   - component: {fileID: 1836964341}
   m_Layer: 0
-  m_Name: MainMenu
+  m_Name: StartMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -858,6 +906,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24246d11e760dc549b1535dc65f1ff94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelToLoad: MainMenu
+  sceneFader: {fileID: 59317484}
 --- !u!4 &1836964342
 Transform:
   m_ObjectHideFlags: 0

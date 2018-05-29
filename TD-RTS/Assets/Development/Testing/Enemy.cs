@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour {
     //so slowing knows what to set speed back to
     public float startSpeed = 10f;
     public float startHealth = 100;
+    [HideInInspector]
     public float health;
     public int value = 25;
     public GameObject deathEffect;
@@ -41,6 +42,8 @@ public class Enemy : MonoBehaviour {
 
         GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, .5f);
+
+        WaveSpawner.enemiesAlive--;
 
         Destroy(gameObject);
     }
