@@ -18,12 +18,12 @@ MonoBehaviour:
   m_fontInfo:
     Name: LCD Solid
     PointSize: 74
-    Scale: 0
+    Scale: 1
     CharacterCount: 95
     LineHeight: 74
     Baseline: 0
     Ascender: 64
-    CapHeight: 0
+    CapHeight: 59
     Descender: -11
     CenterLine: 0
     SuperscriptOffset: 64
@@ -33,7 +33,7 @@ MonoBehaviour:
     UnderlineThickness: 1.0571429
     strikethrough: 19.272728
     strikethroughThickness: 1.0571429
-    TabWidth: 0
+    TabWidth: 450
     Padding: 5
     AtlasWidth: 512
     AtlasHeight: 512
@@ -42,10 +42,10 @@ MonoBehaviour:
   - id: 32
     x: 5
     y: 507
-    width: 0
-    height: 0
+    width: 45
+    height: 75
     xOffset: 0
-    yOffset: 0
+    yOffset: 64
     xAdvance: 45
     scale: 1
   - id: 33
