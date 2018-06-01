@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     public GameObject gameOverUI;
+    public GameObject gameWonUI;
+    public int levelToUnlock;
 
     public static bool GameIsOver;
 
@@ -29,6 +31,14 @@ public class GameManager : MonoBehaviour {
     {
         GameIsOver = true;
         gameOverUI.SetActive(true);
+    }
+    //called from WaveSpawner
+    public void WinLevel()
+    {
+        GameIsOver = true;
+        Debug.Log("Level Won");
+        //save level passed
+        gameWonUI.SetActive(true);
     }
 
 }
