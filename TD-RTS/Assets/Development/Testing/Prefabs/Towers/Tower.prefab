@@ -55,6 +55,11 @@ MonoBehaviour:
   range: 5
   fireRate: 1
   enemyTag: Enemy
+  useLaser: 0
+  damageOverTime: 30
+  slowAmount: 0.5
+  lineRenderer: {fileID: 0}
+  impactEffect: {fileID: 0}
   bulletPrefab: {fileID: 1416955123671676, guid: 13891f8411e0e1d43bd8bf8b0fcde5d3,
     type: 2}
 --- !u!212 &212508818873099002
