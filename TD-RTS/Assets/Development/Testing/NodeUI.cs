@@ -13,16 +13,6 @@ public class NodeUI : MonoBehaviour {
 
     private Node target;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     public void SetTarget(Node _target)
     {
         target = _target;
@@ -31,7 +21,11 @@ public class NodeUI : MonoBehaviour {
 
         if (!target.isUpgraded)
         {
-            upgradeCost.text = "$ " + target.towerBlueprint.upgradeCost;
+            if (!target.isBaseNode)
+                upgradeCost.text = "$ " + target.towerBlueprint.upgradeCost;
+            else
+                upgradeCost.text = "$" + target.baseBlueprint.upgradeCost;
+
             upgradeButton.interactable = true;
         }
         else
@@ -40,7 +34,10 @@ public class NodeUI : MonoBehaviour {
             upgradeButton.interactable = false;
         }
 
-        sellValue.text = "$ " + target.towerBlueprint.GetSellAmount();
+        if (!target.isBaseNode)
+            sellValue.text = "$ " + target.towerBlueprint.GetSellAmount();
+        else
+            sellValue.text = "$" + target.baseBlueprint.GetSellAmount();
 
         ui.SetActive(true);
     }
@@ -52,13 +49,19 @@ public class NodeUI : MonoBehaviour {
 
     public void Upgrade()
     {
-        target.UpgradeTower();
+        if (!target.isBaseNode)
+            target.UpgradeTower();
+        else
+            target.UpgradeBase();
         BuildManager.instance.DeselectNode();
     }
 
     public void Sell()
     {
-        target.SellTower();
+        if (!target.isBaseNode)
+            target.SellTower();
+        else
+            target.SellBase();
         BuildManager.instance.DeselectNode();
     }
 

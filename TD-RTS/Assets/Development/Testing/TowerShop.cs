@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Shop : MonoBehaviour {
+public class TowerShop : MonoBehaviour {
 
     //make one for each tower
     public TowerBlueprint standardTower;

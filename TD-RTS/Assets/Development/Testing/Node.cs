@@ -3,13 +3,16 @@ using UnityEngine.EventSystems;
 
 public class Node : MonoBehaviour {
 
+    public bool isBaseNode = false;
     public Color hoverColor;
     public Color cantBuildColor;
     [Header("Optional")]
-    public GameObject tower;
+    public GameObject building;
 
     [HideInInspector]
     public TowerBlueprint towerBlueprint;
+    [HideInInspector]
+    public BaseBlueprint baseBlueprint;
     [HideInInspector]
     public bool isUpgraded = false;
 
@@ -37,67 +40,115 @@ public class Node : MonoBehaviour {
             return;
 
         //if there is already a tower
-        if (tower != null)
+        if (building != null)
         {
             //select node tower is on
             buildManager.SelectNode(this);
             return;
         }
 
-        //if no tower is selected
-        if (!buildManager.CanBuild)
+        //if no tower or base is selected
+        if (!buildManager.CanBuildTower && !buildManager.CanBuildBase)
             return;
 
-        //Build a tower
-        BuildTower(buildManager.GetTowerToBuild());
-        //unselect tower type after building
-        //buildManager.towerToBuild = null;
-        
+        if (!isBaseNode)
+        {
+            //Build a tower
+            BuildTower(buildManager.GetTowerToBuild());
+            //unselect tower type after building
+            //buildManager.towerToBuild = null;
+        }
+        else
+        {
+            //Build base building
+            BuildBase(buildManager.GetBaseToBuild());
+            //unselect building type after building
+            buildManager.baseToBuild = null;
+        }
+
     }
 
     void BuildTower(TowerBlueprint _blueprint)
     {
         if (PlayerStats.Money < _blueprint.cost)
         {
-            Debug.Log(PlayerStats.Money + " is not enough to build " + _blueprint.prefab.name);
             return;
         }
 
         PlayerStats.Money -= _blueprint.cost;
         
-        GameObject newTower = Instantiate(_blueprint.prefab, GetBuildPosition(), Quaternion.identity);
-        tower = newTower;
+        GameObject newBuilding = Instantiate(_blueprint.prefab, GetBuildPosition(), Quaternion.identity);
+        building = newBuilding;
 
         towerBlueprint = _blueprint;
-
-        Debug.Log(_blueprint.prefab.name + " built. Money left = " + PlayerStats.Money);
+        
     }
 
     public void UpgradeTower()
     {
         if(PlayerStats.Money < towerBlueprint.upgradeCost)
         {
-            Debug.Log(PlayerStats.Money + " is not enough to upgrade " + towerBlueprint.prefab.name);
             return;
         }
 
         PlayerStats.Money -= towerBlueprint.upgradeCost;
         //Destroy old version of turret for new one
-        Destroy(tower);
+        Destroy(building);
         //Build upgraded turret
-        GameObject newTower = Instantiate(towerBlueprint.upgradedPrefab, GetBuildPosition(), Quaternion.identity);
-        tower = newTower;
+        GameObject newBuilding = Instantiate(towerBlueprint.upgradedPrefab, GetBuildPosition(), Quaternion.identity);
+        building = newBuilding;
 
         isUpgraded = true;
-        Debug.Log(towerBlueprint.prefab.name + " upgraded. Money left = " + PlayerStats.Money);
     }
 
     public void SellTower()
     {
         PlayerStats.Money += towerBlueprint.GetSellAmount();
-        Destroy(tower);
-        tower = null;
+        Destroy(building);
+        building = null;
         towerBlueprint = null;
+        isUpgraded = false;
+    }
+
+    void BuildBase(BaseBlueprint _blueprint)
+    {
+        if (PlayerStats.Money < _blueprint.cost)
+        {
+            return;
+        }
+
+        PlayerStats.Money -= _blueprint.cost;
+
+        GameObject newBuilding = Instantiate(_blueprint.prefab, GetBuildPosition(), Quaternion.identity);
+        building = newBuilding;
+
+        baseBlueprint = _blueprint;
+    }
+
+    public void UpgradeBase()
+    {
+        if (PlayerStats.Money < baseBlueprint.upgradeCost)
+        {
+            return;
+        }
+
+        PlayerStats.Money -= baseBlueprint.upgradeCost;
+        //Destroy old version of building for new one
+        Destroy(building);
+        //Build upgraded building
+        GameObject newBuilding = Instantiate(baseBlueprint.upgradedPrefab, GetBuildPosition(), Quaternion.identity);
+        building = newBuilding;
+
+        isUpgraded = true;
+        Debug.Log(baseBlueprint.prefab.name + " upgraded. Money left = " + PlayerStats.Money);
+    }
+
+    public void SellBase()
+    {
+        PlayerStats.Money += baseBlueprint.GetSellAmount();
+        Destroy(building);
+        building = null;
+        baseBlueprint = null;
         isUpgraded = false;
     }
 
@@ -107,16 +158,31 @@ public class Node : MonoBehaviour {
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
-        if (!buildManager.CanBuild)
+        if (!buildManager.CanBuildTower && !buildManager.CanBuildBase)
             return;
 
-        if (buildManager.HasMoney)
+        if (!isBaseNode)
         {
-            rend.material.color = hoverColor;
+            if (buildManager.HasMoneyTower)
+            {
+                rend.material.color = hoverColor;
+            }
+            else
+            {
+                rend.material.color = cantBuildColor;
+            }
         }
-        else
+        
+        if (isBaseNode)
         {
-            rend.material.color = cantBuildColor;
+            if (buildManager.HasMoneyBase)
+            {
+                rend.material.color = hoverColor;
+            }
+            else
+            {
+                rend.material.color = cantBuildColor;
+            }
         }
     }
 

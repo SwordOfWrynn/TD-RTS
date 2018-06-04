@@ -17,11 +17,14 @@ public class BuildManager : MonoBehaviour {
     #endregion
 
     public TowerBlueprint towerToBuild;
+    public BaseBlueprint baseToBuild;
     private Node selectedNode;
 
     //if towerToBuild not equal to null returns true, else returns false
-    public bool CanBuild { get { return towerToBuild != null; } }
-    public bool HasMoney { get { return PlayerStats.Money >= towerToBuild.cost; } }
+    public bool CanBuildTower { get { return towerToBuild != null; } }
+    public bool CanBuildBase { get { return baseToBuild != null; } }
+    public bool HasMoneyTower { get { return PlayerStats.Money >= towerToBuild.cost; } }
+    public bool HasMoneyBase { get { return PlayerStats.Money >= baseToBuild.cost; } }
     public NodeUI nodeUI;
 
     public void SelectNode(Node _node)
@@ -34,6 +37,7 @@ public class BuildManager : MonoBehaviour {
 
         selectedNode = _node;
         towerToBuild = null;
+        baseToBuild = null;
 
         nodeUI.SetTarget(_node);
     }
@@ -47,6 +51,14 @@ public class BuildManager : MonoBehaviour {
     public void SelectTowerToBuild(TowerBlueprint _tower)
     {
         towerToBuild = _tower;
+        baseToBuild = null;
+        DeselectNode();
+    }
+
+    public void SelectBaseToBuild(BaseBlueprint _base)
+    {
+        baseToBuild = _base;
+        towerToBuild = null;
         DeselectNode();
     }
 
@@ -54,6 +66,12 @@ public class BuildManager : MonoBehaviour {
     public TowerBlueprint GetTowerToBuild()
     {
         return towerToBuild;
+    }
+
+    //tell other scripts what base is selected without making baseToBuild public
+    public BaseBlueprint GetBaseToBuild()
+    {
+        return baseToBuild;
     }
 
 }
