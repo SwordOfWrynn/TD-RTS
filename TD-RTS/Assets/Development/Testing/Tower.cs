@@ -21,6 +21,7 @@ public class Tower : MonoBehaviour {
     [Header("Unity Setup")]
     public GameObject bulletPrefab;
 
+    private float startFireRate;
     private Transform target;
     private Enemy targetEnemy;
     private float fireCountdown = 0f;
@@ -28,6 +29,7 @@ public class Tower : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        startFireRate = fireRate;
 	}
     
     void UpdateTarget()
@@ -83,7 +85,8 @@ public class Tower : MonoBehaviour {
                Shoot();
                fireCountdown = 1f / fireRate;
            }
-        fireCountdown -= Time.deltaTime;
+            fireCountdown -= Time.deltaTime;
+            fireRate = startFireRate;
         }
 	}
 
@@ -120,6 +123,11 @@ public class Tower : MonoBehaviour {
         Bullet bullet = bulletGO.GetComponent<Bullet>();
         if (bullet != null)
             bullet.Seek(target, enemyTag);
+    }
+
+    public void EnhancedFireRate(float _increase)
+    {
+        fireRate = startFireRate * _increase;
     }
 
 

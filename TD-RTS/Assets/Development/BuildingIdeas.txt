@@ -1,0 +1,12 @@
+Towers-
+Basic shoot projectile
+Area damage
+slowing
+burst attack (electricity)
+increase damage of nearby towers
+
+Base-
+resource producing
+barracks
+research
+upgrade

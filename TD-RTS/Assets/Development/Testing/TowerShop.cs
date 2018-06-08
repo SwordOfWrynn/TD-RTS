@@ -6,6 +6,7 @@ public class TowerShop : MonoBehaviour {
     public TowerBlueprint standardTower;
     public TowerBlueprint missileTower;
     public TowerBlueprint laserTower;
+    public TowerBlueprint enhanceTower;
 
     BuildManager buildManager;
 
@@ -30,6 +31,12 @@ public class TowerShop : MonoBehaviour {
     {
         Debug.Log("Missile Tower selected");
         buildManager.SelectTowerToBuild(laserTower);
+    }
+
+    public void SelectEnhanceTower()
+    {
+        Debug.Log("Enhance Tower selected");
+        buildManager.SelectTowerToBuild(enhanceTower);
     }
 
 }
